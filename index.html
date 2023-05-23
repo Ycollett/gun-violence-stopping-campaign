@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Data Table Example</title>
+  <style>
+    /* CSS styles for the table */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Data Table Example</h1>
+  
+  <table id="data-table">
+    <thead>
+      <tr>
+        <th>Column 1</th>
+        <th>Column 2</th>
+        <th>Column 3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Rows and data will be dynamically added here -->
+    </tbody>
+  </table>
+
+  <script>
+    // JavaScript code to import data into the table
+
+    // Fetch the data from a JSON file
+    fetch('data.json')
+      .then(response => response.json())
+      .then(data => {
+        var table = document.getElementById('data-table');
+        var tbody = table.getElementsByTagName('tbody')[0];
+
+        // Iterate over the data and create rows for each item
+        for (var i = 0; i < data.length; i++) {
+          var row = document.createElement('tr');
+          var item = data[i];
+
+          // Create cells and add data to them
+          var cell1 = document.createElement('td');
+          cell1.textContent = item.col1;
+          row.appendChild(cell1);
+
+          var cell2 = document.createElement('td');
+          cell2.textContent = item.col2;
+          row.appendChild(cell2);
+
+          var cell3 = document.createElement('td');
+          cell3.textContent = item.col3;
+          row.appendChild(cell3);
+
+          // Append the row to the table body
+          tbody.appendChild(row);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  </script>
+</body>
+</html>
